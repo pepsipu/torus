@@ -1,51 +1,59 @@
 {
+  "name": "OliveWalk",
+  "displayName": "OliveWalk",
   "expo": {
-    "name": "olivewalk",
-    "slug": "olivewalk",
+    "name": "OliveWalk",
+    "slug": "OliveWalk",
+    "scheme": "olivewalk",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
     "userInterfaceStyle": "automatic",
+    "icon": "./assets/images/app-icon-all.png",
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
     "newArchEnabled": true,
+    "jsEngine": "hermes",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "android": {
+      "icon": "./assets/images/app-icon-android-legacy.png",
+      "package": "com.pepsipu.olivewalk",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/app-icon-android-adaptive-foreground.png",
+        "backgroundImage": "./assets/images/app-icon-android-adaptive-background.png"
+      }
+    },
     "ios": {
+      "icon": "./assets/images/app-icon-ios.png",
       "supportsTablet": true,
       "bundleIdentifier": "com.pepsipu.olivewalk"
     },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
-      "package": "com.pepsipu.olivewalk"
-    },
     "web": {
-      "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/app-icon-web-favicon.png",
+      "bundler": "metro"
     },
     "plugins": [
-      "expo-router",
+      "expo-localization",
+      "expo-font",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 200,
+          "image": "./assets/images/app-icon-android-adaptive-foreground.png",
+          "imageWidth": 300,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#191015"
         }
-      ]
+      ],
+      "expo-router"
     ],
     "experiments": {
+      "tsconfigPaths": true,
       "typedRoutes": true
-    },
-    "extra": {
-      "router": {
-        "origin": false
-      },
-      "eas": {
-        "projectId": "9b2ab5d8-4bfb-498c-b53d-06a56efdb060"
-      }
     }
+  },
+  "ignite": {
+    "version": "10.1.6"
   }
 }
