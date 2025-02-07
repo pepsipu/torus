@@ -1,59 +1,37 @@
 {
-  "name": "OliveWalk",
-  "displayName": "OliveWalk",
   "expo": {
-    "name": "OliveWalk",
-    "slug": "OliveWalk",
-    "scheme": "olivewalk",
+    "name": "olivewalk",
+    "slug": "olivewalk",
     "version": "1.0.0",
     "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "myapp",
     "userInterfaceStyle": "automatic",
-    "icon": "./assets/images/app-icon-all.png",
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
     "newArchEnabled": true,
-    "jsEngine": "hermes",
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "android": {
-      "icon": "./assets/images/app-icon-android-legacy.png",
-      "package": "com.pepsipu.olivewalk",
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/images/app-icon-android-adaptive-foreground.png",
-        "backgroundImage": "./assets/images/app-icon-android-adaptive-background.png"
-      }
+    "splash": {
+      "image": "./assets/images/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
     },
     "ios": {
-      "icon": "./assets/images/app-icon-ios.png",
-      "supportsTablet": true,
-      "bundleIdentifier": "com.pepsipu.olivewalk"
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
     },
     "web": {
-      "favicon": "./assets/images/app-icon-web-favicon.png",
-      "bundler": "metro"
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-localization",
-      "expo-font",
-      [
-        "expo-splash-screen",
-        {
-          "image": "./assets/images/app-icon-android-adaptive-foreground.png",
-          "imageWidth": 300,
-          "resizeMode": "contain",
-          "backgroundColor": "#191015"
-        }
-      ],
       "expo-router"
     ],
     "experiments": {
-      "tsconfigPaths": true,
       "typedRoutes": true
     }
-  },
-  "ignite": {
-    "version": "10.1.6"
   }
 }
