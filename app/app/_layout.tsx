@@ -1,73 +1,119 @@
-import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { OverlayProvider } from "@/components/Overlay/OverlayProvider";
+import { AudioProvider, useAudio } from "@/contexts/AudioContext";
+import { RootScaleProvider, useRootScale } from "@/contexts/RootScaleContext";
+import { Appearance } from "@/helper/appearance";
 import {
   DarkTheme,
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native";
-import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
+import { Stack, useRouter, useSegments } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
+import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
-import "react-native-reanimated";
+import {
+  LogBox,
+  Platform,
+  StyleSheet,
+  useColorScheme,
+  View,
+} from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import Animated, { useAnimatedStyle } from "react-native-reanimated";
+import "../global.css";
 
-import { TamaguiProvider, createTamagui } from "@tamagui/core";
-import { defaultConfig } from "@tamagui/config/v4";
+LogBox.ignoreAllLogs();
 
-import { useColorScheme } from "@/components/useColorScheme";
+function AnimatedStack() {
+  const segments = useSegments();
+  const router = useRouter();
+  const { scale } = useRootScale();
+  const { currentEpisode, isPlaying, togglePlayPause } = useAudio();
+  const isIOS = Platform.OS === "ios";
 
-export {
-  // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
-} from "expo-router";
+  const animatedStyle = useAnimatedStyle(() => {
+    "worklet";
+    return {
+      transform: [
+        { scale: scale.value },
+        { translateY: (1 - scale.value) * -150 },
+      ],
+      borderRadius: scale.value === 1 ? 0 : 50,
+      backgroundColor: "#fff",
+    };
+  }, []);
 
-export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: "(tabs)",
-};
+  const containerStyle = useAnimatedStyle(() => {
+    "worklet";
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
-
-export default function RootLayout() {
-  const [loaded, error] = useFonts({
-    Inter: require("@tamagui/font-inter/otf/Inter-Medium.otf"),
-    InterBold: require("@tamagui/font-inter/otf/Inter-Bold.otf"),
-    ...FontAwesome.font,
-  });
-
-  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
-  useEffect(() => {
-    if (error) throw error;
-  }, [error]);
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
-
-  return <RootLayoutNav />;
-}
-
-const config = createTamagui(defaultConfig);
-
-type Conf = typeof config;
-
-function RootLayoutNav() {
-  const colorScheme = useColorScheme();
+    return {
+      flex: 1,
+      backgroundColor: "#000",
+    };
+  }, []);
 
   return (
-    <TamaguiProvider config={config} defaultTheme={colorScheme!}>
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Stack>
+    <Animated.View style={containerStyle}>
+      <Animated.View
+        style={[
+          styles.stackContainer,
+          Platform.OS === "ios" && animatedStyle,
+          Platform.OS === "web" && {
+            position: "relative",
+            overflow: "unset!important",
+            height: "auto",
+          },
+        ]}
+      >
+        <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+          <Stack.Screen name="+not-found" />
         </Stack>
-      </ThemeProvider>
-    </TamaguiProvider>
+      </Animated.View>
+    </Animated.View>
   );
 }
+
+export default function RootLayout() {
+  const colorScheme = useColorScheme();
+
+  Appearance.setColorScheme("light");
+
+  useEffect(() => {
+    SplashScreen.hideAsync();
+  }, []);
+
+  return (
+    <View style={{ flex: 1 }}>
+      <StatusBar
+        style={"dark"}
+        backgroundColor="transparent"
+        translucent={true}
+      />
+      <GestureHandlerRootView style={styles.container}>
+        <ThemeProvider
+          value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+        >
+          <RootScaleProvider>
+            <AudioProvider>
+              <OverlayProvider>
+                <AnimatedStack />
+              </OverlayProvider>
+            </AudioProvider>
+          </RootScaleProvider>
+        </ThemeProvider>
+      </GestureHandlerRootView>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: Platform.OS !== "web" ? 1 : 0,
+    backgroundColor: Platform.OS === "ios" ? "black" : "transparent",
+  },
+  stackContainer: {
+    flex: 1,
+    overflow: "hidden",
+  },
+});

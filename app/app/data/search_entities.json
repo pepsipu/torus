@@ -1,0 +1,37 @@
+{
+    "categories": [
+        {
+            "id": "puzzles",
+            "items": []
+        },
+        {
+            "id": "shared",
+            "items": []
+        },
+        {
+            "id": "saved",
+            "items": []
+        },
+        {
+            "id": "history",
+            "items": []
+        }
+    ],
+    "sections": [
+        {
+            "id": "special_coverage",
+            "title": "Special Coverage",
+            "items": [ "nfl_superbowl", "indian_premier_league", "climate_change"]
+        },
+        {
+            "id": "trending",
+            "title": "Trending",
+            "items": ["tech_news", "business", "elon_musk", "donald_trump", "arsenal", "china"]
+        },
+        {
+            "id": "my_following",
+            "title": "My Following",
+            "items": ["man_utd", "premier_league", "nba", "nfl", "soccer"]
+        }
+    ]
+}
