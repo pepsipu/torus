@@ -130,7 +130,6 @@ const useWindowSize = () => {
 };
 
 export function Sidebar() {
-  // const windowWidth = useWindowSize();
   const shouldUseCustomFont = true; // Only use custom font on larger screens
 
   const [fontsLoaded] = useFonts({
@@ -233,7 +232,7 @@ export function Sidebar() {
                 color={isFocused ? "#FA2E46" : "#666"}
               />
               <TextInput
-                placeholder="Search Apple News"
+                placeholder="Search Olive Walk"
                 style={[styles.input, { WebkitAppearance: "none" }] as any}
                 placeholderTextColor="#666"
                 value={searchQuery}

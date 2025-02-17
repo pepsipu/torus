@@ -5,12 +5,10 @@ import { Logo } from "@/components/NewsLogo";
 import { Sidebar } from "@/components/Sidebar";
 import SocialButtons from "@/components/SocialButtons";
 import { useAudio } from "@/contexts/AudioContext";
-import podcasts from "@/data/podcasts.json";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { getAllEntitiesForSection } from "@/src/utils/entityUtils";
 import { Ionicons } from "@expo/vector-icons";
 import { Stack, useRouter, useSegments } from "expo-router";
-import { useEffect } from "react";
 import {
   Platform,
   Pressable,
@@ -35,15 +33,6 @@ type Entity = {
   };
 };
 
-// type AppRoutes =
-//   | "/(tabs)/(index)"
-//   | "/(tabs)/(news+)"
-//   | "/(tabs)/(sports)"
-//   | "/(tabs)/(audio)"
-//   | "/(tabs)/(search)"
-//   | { pathname: string; params?: Record<string, string> };
-
-// Helper component for sidebar items
 function SidebarItem({
   icon,
   label,
@@ -51,7 +40,7 @@ function SidebarItem({
   isActive,
   compact = false,
 }: {
-  icon: keyof typeof Ionicons.glyphMap | "home" | "news" | "sports" | "search";
+  icon: keyof typeof Ionicons.glyphMap;
   label: string;
   href: string;
   isActive?: boolean;
@@ -69,7 +58,7 @@ function SidebarItem({
       : "rgba(255, 59, 48, 0.15)";
   const textColor = colorScheme === "dark" ? "#e7e9ea" : "#000000";
 
-  const iconColor = isActive ? "#FD325A" : "#8E8E8F";
+  const iconColor = isActive ? "#FF6C0C" : "#8E8E8F";
 
   const size = compact ? 28 : 24;
 
@@ -137,57 +126,6 @@ const WebLayout = () => {
   const isMobile = width < 768;
   const hideSideBar = width >= 1024;
 
-  useEffect(() => {
-    const loadInitialAudio = async () => {
-      if (Platform.OS === "web") {
-        const episodes = podcasts.results["podcast-episodes"][0].data;
-        const randomIndex = Math.floor(Math.random() * episodes.length);
-        const firstEpisode = episodes[randomIndex];
-
-        if (firstEpisode && firstEpisode.attributes.assetUrl) {
-          const imageUrl =
-            firstEpisode.attributes.artwork?.url
-              ?.replace("{w}", "300")
-              .replace("{h}", "300")
-              .replace("{f}", "jpg") || "https://via.placeholder.com/300";
-
-          const podcast = {
-            id: firstEpisode.id,
-            title: firstEpisode.attributes.name,
-            streamUrl: firstEpisode.attributes.assetUrl,
-            artwork: { url: imageUrl },
-            showTitle: firstEpisode.attributes.artistName,
-            duration: firstEpisode.attributes.durationInMilliseconds || 0,
-            releaseDate: firstEpisode.attributes.releaseDateTime,
-            summary: firstEpisode.attributes.description?.standard || "",
-            attributes: {
-              offers: [
-                {
-                  kind: "get",
-                  type: "STDQ",
-                  hlsUrl: firstEpisode.attributes.assetUrl,
-                },
-              ],
-              durationInMilliseconds:
-                firstEpisode.attributes.durationInMilliseconds || 0,
-              name: firstEpisode.attributes.name,
-              artistName: firstEpisode.attributes.artistName,
-            },
-          };
-
-          try {
-            await closePlayer();
-            await loadEpisodeWithoutPlaying(podcast);
-          } catch (error) {
-            console.error("Error loading initial podcast:", error);
-          }
-        }
-      }
-    };
-
-    loadInitialAudio();
-  }, []); // Empty dependency array
-
   const backgroundColor = "#f9f9f9";
 
   return (
@@ -217,15 +155,15 @@ const WebLayout = () => {
 
               <View className="">
                 <SidebarItem
-                  icon="home"
-                  label="Home"
+                  icon="compass-outline"
+                  label="Campus"
                   href="/"
                   compact={isCompact}
                   isActive={segments.length === 2}
                 />
                 <SidebarItem
-                  icon="news"
-                  label="News+"
+                  icon="calendar-outline"
+                  label="Schedule"
                   href="/news+"
                   compact={isCompact}
                   isActive={segments[2] === "news+"}

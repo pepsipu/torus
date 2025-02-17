@@ -132,7 +132,7 @@ const renderNewsContent = ({
             className="flex-row py-1  absolute top-0 left-0 w-full "
           >
             <View className="pl-3 py-1 flex-row items-center gap-1">
-              <Logo size={16} color="#F92B53" forceShow={true} />
+              <Logo size={16} color="#FF6C0C" forceShow={true} />
               <Text className="text-sm font-bold text-apple-news">+</Text>
             </View>
           </LinearGradient>
@@ -205,7 +205,7 @@ const renderNewsContent = ({
           className="flex-row py-1   top-0 left-0 w-full  z-50 "
         >
           <View className="pl-3 flex-row items-center gap-1  h-[24px] ">
-            <Logo size={16} color="#F92B53" forceShow={true} />
+            <Logo size={16} color="#FF6C0C" forceShow={true} />
             <Text className="text-sm font-bold text-apple-news">+</Text>
           </View>
         </LinearGradient>
