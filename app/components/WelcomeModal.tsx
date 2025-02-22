@@ -5,7 +5,7 @@ import { Animated, Modal, Pressable, Text, View } from "react-native";
 import { MMKV } from "react-native-mmkv";
 import { OliveWalkIcon } from "./icons/OliveWalkIcon";
 
-const storage = new MMKV();
+// const storage = new MMKV();
 
 export const WelcomeModal = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -18,7 +18,8 @@ export const WelcomeModal = () => {
   const scaleAnimText = useRef(new Animated.Value(0.95)).current;
 
   useEffect(() => {
-    const isWelcomed = storage.getBoolean("is_welcomed");
+    // const isWelcomed = storage.getBoolean("is_welcomed");
+    const isWelcomed = false;
     // if (isWelcomed) {
     //   setIsVisible(false);
     // }
@@ -77,7 +78,7 @@ export const WelcomeModal = () => {
   }, []);
 
   const handleContinue = () => {
-    storage.set("is_welcomed", true);
+    // storage.set("is_welcomed", true);
     setIsVisible(false);
   };
 

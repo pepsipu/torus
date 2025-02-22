@@ -16,20 +16,7 @@ import {
 
 import "../../global.css";
 import { AppleNewsLogo } from "@/components/icons/AppleNewsLogo";
-
-type Entity = {
-  id: string;
-  title: string;
-  logo?: string;
-  icon?: string;
-  type: string;
-  entity_type?: string;
-  description?: string;
-  theme?: {
-    backgroundColor: string;
-    textColor: string;
-  };
-};
+import { tabs } from "../data/tabs";
 
 function SidebarItem({
   icon,
@@ -60,29 +47,6 @@ function SidebarItem({
 
   const size = compact ? 28 : 24;
 
-  const getIcon = () => {
-    switch (icon) {
-      case "home":
-        return <Ionicons name="headset" size={size} color={iconColor} />;
-      case "news":
-        return <Ionicons name="headset" size={size} color={iconColor} />;
-      case "sports":
-        return <Ionicons name="headset" size={size} color={iconColor} />;
-      case "search":
-        return <Ionicons name="headset" size={size} color={iconColor} />;
-      case "headset":
-        return <Ionicons name="headset" size={size} color={iconColor} />;
-      default:
-        return (
-          <Ionicons
-            name={icon as keyof typeof Ionicons.glyphMap}
-            size={size}
-            color={iconColor}
-          />
-        );
-    }
-  };
-
   return (
     <Pressable
       onPress={() => {
@@ -98,7 +62,11 @@ function SidebarItem({
         (pressed || hovered) && { backgroundColor: hoverBg },
       ]}
     >
-      {getIcon()}
+      <Ionicons
+        name={icon as keyof typeof Ionicons.glyphMap}
+        size={size}
+        color={iconColor}
+      />
       {!compact && (
         <Text
           className={`text-[15px] font-semibold ${isActive ? "font-bold" : ""}`}
@@ -111,6 +79,112 @@ function SidebarItem({
   );
 }
 
+const DesktopWebLayout = (
+  isCompact: boolean,
+  borderColor: string,
+  segments: string[]
+) => {
+  return (
+    <View
+      className={`${
+        isCompact ? "w-[72px]" : ""
+      } items-end sticky top-0 h-screen border-r border-gray-500`}
+      style={{ borderRightColor: borderColor }}
+    >
+      <View
+        className={`sticky ${
+          isCompact ? "w-[72px] p-2" : "w-[275px] p-2"
+        } h-full`}
+      >
+        <View
+          className={`fixed ${
+            isCompact ? "w-[72px] p-2" : "w-[275px] p-2"
+          } h-full`}
+        >
+          <View className="mb-8 pl-3 pt-3">
+            <View className="flex-row items-center gap-[2px] mt-2">
+              <Logo size={isCompact ? 32 : 40} forceShow={true} />
+            </View>
+          </View>
+
+          <View className="">
+            {tabs.map((tab) => (
+              <SidebarItem
+                icon={tab.icon}
+                label={tab.title}
+                href={tab.href}
+                compact={isCompact}
+                isActive={segments[2] == tab.href}
+              />
+            ))}
+          </View>
+
+          <View className="mr-7 mt-4">
+            {" "}
+            {!isCompact && <SocialButtons showGithub />}
+          </View>
+        </View>
+      </View>
+    </View>
+  );
+};
+
+const MobileWebLayout = (
+  router: any,
+  segments: any,
+  borderColor: string,
+  colorScheme: any
+) => {
+  return (
+    <View
+      className={`fixed bottom-0 left-0 right-0 h-16 flex-row border-t ${
+        Platform.OS === "ios" ? "pb-5" : ""
+      }`}
+      style={{
+        borderTopColor: borderColor,
+        backgroundColor:
+          colorScheme === "dark"
+            ? "rgba(0, 0, 0, 0.7)"
+            : "rgba(255, 255, 255, 0.7)",
+        backdropFilter: Platform.OS === "web" ? "blur(12px)" : undefined,
+      }}
+    >
+      {tabs.map((tab) => (
+        <Pressable
+          onPress={() => router.push(tab.href)}
+          className="flex-1 items-center justify-center gap-1"
+        >
+          <Ionicons
+            name={tab.icon}
+            width={24}
+            height={24}
+            color={
+              segments.length === 2
+                ? "#FA2E47"
+                : colorScheme === "dark"
+                ? "#999"
+                : "#666"
+            }
+          />
+          <Text
+            className="text-xs font-medium"
+            style={{
+              color:
+                segments.length === 2
+                  ? "#FA2E47"
+                  : colorScheme === "dark"
+                  ? "#999"
+                  : "#666",
+            }}
+          >
+            {tab.title}
+          </Text>
+        </Pressable>
+      ))}
+    </View>
+  );
+};
+
 const WebLayout = () => {
   const colorScheme = useColorScheme();
   const { width } = useWindowDimensions();
@@ -122,93 +196,15 @@ const WebLayout = () => {
   const isMobile = width < 768;
   const hideSideBar = width >= 1024;
 
+  const Layout = isMobile
+    ? MobileWebLayout(router, segments, borderColor, colorScheme)
+    : DesktopWebLayout(isCompact, borderColor, segments);
+
   const backgroundColor = "#f9f9f9";
 
   return (
     <View className="flex-row left-0 right-0 bg-white justify-center relative">
-      {!isMobile && (
-        <View
-          className={`${
-            isCompact ? "w-[72px]" : ""
-          } items-end sticky top-0 h-screen border-r border-gray-500`}
-          style={{ borderRightColor: borderColor }}
-        >
-          <View
-            className={`sticky ${
-              isCompact ? "w-[72px] p-2" : "w-[275px] p-2"
-            } h-full`}
-          >
-            <View
-              className={`fixed ${
-                isCompact ? "w-[72px] p-2" : "w-[275px] p-2"
-              } h-full`}
-            >
-              <View className="mb-8 pl-3 pt-3">
-                <View className="flex-row items-center gap-[2px] mt-2">
-                  <Logo size={isCompact ? 32 : 40} forceShow={true} />
-                </View>
-              </View>
-
-              <View className="">
-                <SidebarItem
-                  icon="compass-outline"
-                  label="Campus"
-                  href="/"
-                  compact={isCompact}
-                  isActive={segments.length === 2}
-                />
-                <SidebarItem
-                  icon="calendar-outline"
-                  label="Schedule"
-                  href="/news+"
-                  compact={isCompact}
-                  isActive={segments[2] === "news+"}
-                />
-              </View>
-
-              <View className="mt-8 gap-2">
-                {!isCompact && (
-                  <Text className="text-sm font-medium text-gray-500 px-3">
-                    Home
-                  </Text>
-                )}
-                <SidebarItem
-                  icon="search"
-                  label="Following"
-                  href="/(tabs)/(search)"
-                  compact={isCompact}
-                  isActive={segments[1] === "(search)"}
-                />
-              </View>
-
-              {searchEntities.sections.map((section) => {
-                if (section.id !== "my_following") return null;
-                return (
-                  <View
-                    key={section.id}
-                    className="gap-3 rounded-2xl p-3 mt-4 mr-6"
-                    style={{ backgroundColor: "#00000008" }}
-                  >
-                    {!isCompact && (
-                      <Text className="text-sm text-gray-500">
-                        {section.title}
-                      </Text>
-                    )}
-                  </View>
-                );
-              })}
-
-              {/* {!isCompact && <SocialButtons showTwitter />} */}
-
-              <View className="mr-7 mt-4">
-                {" "}
-                {!isCompact && <SocialButtons showGithub />}
-              </View>
-            </View>
-          </View>
-        </View>
-      )}
-
+      {!isMobile && Layout}
       <View className="flex-1 w-full max-w-[611px] bg-transparent">
         <Stack
           screenOptions={{
@@ -218,171 +214,7 @@ const WebLayout = () => {
       </View>
 
       <Sidebar />
-
-      {isMobile && (
-        <View
-          className={`fixed bottom-0 left-0 right-0 h-16 flex-row border-t ${
-            Platform.OS === "ios" ? "pb-5" : ""
-          }`}
-          style={{
-            borderTopColor: borderColor,
-            backgroundColor:
-              colorScheme === "dark"
-                ? "rgba(0, 0, 0, 0.7)"
-                : "rgba(255, 255, 255, 0.7)",
-            backdropFilter: Platform.OS === "web" ? "blur(12px)" : undefined,
-          }}
-        >
-          <Pressable
-            onPress={() => router.push("/")}
-            className="flex-1 items-center justify-center gap-1"
-          >
-            <AppleNewsLogo
-              width={24}
-              height={24}
-              color={
-                segments.length === 2
-                  ? "#FA2E47"
-                  : colorScheme === "dark"
-                  ? "#999"
-                  : "#666"
-              }
-            />
-            <Text
-              className="text-xs font-medium"
-              style={{
-                color:
-                  segments.length === 2
-                    ? "#FA2E47"
-                    : colorScheme === "dark"
-                    ? "#999"
-                    : "#666",
-              }}
-            >
-              Home
-            </Text>
-          </Pressable>
-          <Pressable
-            onPress={() => router.push("/news+")}
-            className="flex-1 items-center justify-center gap-1"
-          >
-            <NewsPlus
-              width={24}
-              height={24}
-              color={
-                segments[2] === "news+"
-                  ? "#FA2E47"
-                  : colorScheme === "dark"
-                  ? "#999"
-                  : "#666"
-              }
-            />
-            <Text
-              className="text-xs font-medium"
-              style={{
-                color:
-                  segments[2] === "news+"
-                    ? "#FA2E47"
-                    : colorScheme === "dark"
-                    ? "#999"
-                    : "#666",
-              }}
-            >
-              News+
-            </Text>
-          </Pressable>
-          <Pressable
-            onPress={() => router.push("/sports")}
-            className="flex-1 items-center justify-center gap-1"
-          >
-            <Sports
-              width={30}
-              height={30}
-              color={
-                segments[2] === "sports"
-                  ? "#FA2E47"
-                  : colorScheme === "dark"
-                  ? "#999"
-                  : "#666"
-              }
-            />
-            <Text
-              className="text-xs font-medium"
-              style={{
-                color:
-                  segments[2] === "sports"
-                    ? "#FA2E47"
-                    : colorScheme === "dark"
-                    ? "#999"
-                    : "#666",
-              }}
-            >
-              Sports
-            </Text>
-          </Pressable>
-          <Pressable
-            onPress={() => router.push("/audio")}
-            className="flex-1 items-center justify-center gap-1"
-          >
-            <Ionicons
-              name="headset"
-              size={24}
-              color={
-                segments[2] === "audio"
-                  ? "#FA2E47"
-                  : colorScheme === "dark"
-                  ? "#999"
-                  : "#666"
-              }
-            />
-            <Text
-              className="text-xs font-medium"
-              style={{
-                color:
-                  segments[2] === "audio"
-                    ? "#FA2E47"
-                    : colorScheme === "dark"
-                    ? "#999"
-                    : "#666",
-              }}
-            >
-              Audio
-            </Text>
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              router.push("/search");
-              window?.scrollTo({ top: 0, behavior: "smooth" });
-            }}
-            className="flex-1 items-center justify-center gap-1"
-          >
-            <Search
-              width={24}
-              height={24}
-              color={
-                segments[2] === "search"
-                  ? "#FA2E47"
-                  : colorScheme === "dark"
-                  ? "#999"
-                  : "#666"
-              }
-            />
-            <Text
-              className="text-xs font-medium"
-              style={{
-                color:
-                  segments[2] === "search"
-                    ? "#FA2E47"
-                    : colorScheme === "dark"
-                    ? "#999"
-                    : "#666",
-              }}
-            >
-              Following
-            </Text>
-          </Pressable>
-        </View>
-      )}
+      {isMobile && Layout}
     </View>
   );
 };

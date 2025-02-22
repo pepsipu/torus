@@ -8,8 +8,6 @@ import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import {
-  Appearance,
-  ColorSchemeName,
   Platform,
   StyleSheet,
   useColorScheme,
