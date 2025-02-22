@@ -1,7 +1,3 @@
-import { OverlayProvider } from "@/components/Overlay/OverlayProvider";
-import { AudioProvider, useAudio } from "@/contexts/AudioContext";
-import { RootScaleProvider, useRootScale } from "@/contexts/RootScaleContext";
-import { Appearance } from "@/helper/appearance";
 import {
   DarkTheme,
   DefaultTheme,
@@ -12,7 +8,8 @@ import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import {
-  LogBox,
+  Appearance,
+  ColorSchemeName,
   Platform,
   StyleSheet,
   useColorScheme,
@@ -22,23 +19,17 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Animated, { useAnimatedStyle } from "react-native-reanimated";
 import "../global.css";
 
-LogBox.ignoreAllLogs();
-
 function AnimatedStack() {
   const segments = useSegments();
   const router = useRouter();
-  const { scale } = useRootScale();
-  const { currentEpisode, isPlaying, togglePlayPause } = useAudio();
-  const isIOS = Platform.OS === "ios";
 
   const animatedStyle = useAnimatedStyle(() => {
     "worklet";
     return {
       transform: [
-        { scale: scale.value },
-        { translateY: (1 - scale.value) * -150 },
+        { scale: 1 },
       ],
-      borderRadius: scale.value === 1 ? 0 : 50,
+      borderRadius: 0,
       backgroundColor: "#fff",
     };
   }, []);
@@ -77,8 +68,6 @@ function AnimatedStack() {
 export default function RootLayout() {
   const colorScheme = useColorScheme();
 
-  Appearance.setColorScheme("light");
-
   useEffect(() => {
     SplashScreen.hideAsync();
   }, []);
@@ -94,13 +83,7 @@ export default function RootLayout() {
         <ThemeProvider
           value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
         >
-          <RootScaleProvider>
-            <AudioProvider>
-              <OverlayProvider>
-                <AnimatedStack />
-              </OverlayProvider>
-            </AudioProvider>
-          </RootScaleProvider>
+              <AnimatedStack />
         </ThemeProvider>
       </GestureHandlerRootView>
     </View>

@@ -3,7 +3,6 @@ import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
 import { useRouter } from "expo-router";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import Animated, { FadeInUp, FadeIn } from "react-native-reanimated";
-import { useAudio } from "@/contexts/AudioContext";
 import { PodcastEpisode } from "@/types/podcast";
 import songs from "@/data/songs.json";
 
@@ -30,7 +29,6 @@ const EditorPickItem = memo(
   ({ episode, index }: EditorPickItemProps & { index: number }) => {
     const router = useRouter();
     const colorScheme = useColorScheme();
-    const { commands, sharedValues, currentEpisode } = useAudio();
     const { playEpisode } = commands;
     const { isPlaying } = sharedValues;
 

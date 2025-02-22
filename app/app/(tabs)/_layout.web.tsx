@@ -1,23 +1,21 @@
-import searchEntities from "@/app/data/search_entities.json";
-import { Home, NewsPlus, Search, Sports } from "@/assets/svg/tab-icons";
 import { CategoryCard } from "@/components/CategoryCard";
+import searchEntities from "@/app/data/search_entities.json";
 import { Logo } from "@/components/NewsLogo";
 import { Sidebar } from "@/components/Sidebar";
 import SocialButtons from "@/components/SocialButtons";
-import { useAudio } from "@/contexts/AudioContext";
-import { useColorScheme } from "@/hooks/useColorScheme";
-import { getAllEntitiesForSection } from "@/src/utils/entityUtils";
 import { Ionicons } from "@expo/vector-icons";
 import { Stack, useRouter, useSegments } from "expo-router";
 import {
   Platform,
   Pressable,
   Text,
+  useColorScheme,
   useWindowDimensions,
   View,
 } from "react-native";
 
 import "../../global.css";
+import { AppleNewsLogo } from "@/components/icons/AppleNewsLogo";
 
 type Entity = {
   id: string;
@@ -65,13 +63,13 @@ function SidebarItem({
   const getIcon = () => {
     switch (icon) {
       case "home":
-        return <Home width={size} height={size} color={iconColor} />;
+        return <Ionicons name="headset" size={size} color={iconColor} />;
       case "news":
-        return <NewsPlus width={size} height={size} color={iconColor} />;
+        return <Ionicons name="headset" size={size} color={iconColor} />;
       case "sports":
-        return <Sports width={size} height={size} color={iconColor} />;
+        return <Ionicons name="headset" size={size} color={iconColor} />;
       case "search":
-        return <Search width={size} height={size} color={iconColor} />;
+        return <Ionicons name="headset" size={size} color={iconColor} />;
       case "headset":
         return <Ionicons name="headset" size={size} color={iconColor} />;
       default:
@@ -118,8 +116,6 @@ const WebLayout = () => {
   const { width } = useWindowDimensions();
   const router = useRouter();
   const segments = useSegments();
-  const { commands } = useAudio();
-  const { loadEpisodeWithoutPlaying, closePlayer } = commands;
 
   const borderColor = colorScheme === "dark" ? "#2f3336" : "#eee";
   const isCompact = width < 1024;
@@ -198,22 +194,6 @@ const WebLayout = () => {
                         {section.title}
                       </Text>
                     )}
-                    <View className="gap-3">
-                      {getAllEntitiesForSection(section.id).map(
-                        (entity: Entity) => (
-                          <CategoryCard
-                            key={entity.id}
-                            title={entity.title}
-                            logo={entity.logo}
-                            icon={entity.icon}
-                            id={entity.id}
-                            entity_type={entity.type}
-                            minimal={true}
-                            disable_name={isCompact}
-                          />
-                        )
-                      )}
-                    </View>
                   </View>
                 );
               })}
@@ -257,7 +237,7 @@ const WebLayout = () => {
             onPress={() => router.push("/")}
             className="flex-1 items-center justify-center gap-1"
           >
-            <Home
+            <AppleNewsLogo
               width={24}
               height={24}
               color={

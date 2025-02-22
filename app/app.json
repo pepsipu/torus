@@ -1,73 +1,41 @@
 {
   "expo": {
-    "name": "Olive Walk",
-    "slug": "olive-walk",
+    "name": "olivewalk",
+    "slug": "olivewalk",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
-    "extra": {
-      "eas": {
-        "projectId": "05affb3c-0ace-4c40-bfc3-841eb875d19c",
-        "build": {}
-      }
-    },
-    "splash": {
-      "image": "./assets/images/splash.png",
-      "1sizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
+    "newArchEnabled": true,
     "ios": {
-      "appleTeamId": "F7P5RH5CTP",
-      "supportsTablet": true,
-      "bundleIdentifier": "com.pepsipu.olivewalk",
-      "deploymentTarget": "15.1",
-      "infoPlist": {
-        "NSSupportsLiveActivities": true
-      },
-      "entitlements": {
-        "com.apple.security.application-groups": [
-          "group.com.pepsipu.olivewalk",
-          "group.com.pepsipu.olivewalk"
-        ]
-      }
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "package": "com.pepsipu.olivewalk"
+      }
     },
     "web": {
       "bundler": "metro",
+      "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
       "expo-router",
-      "expo-font",
       [
-        "expo-build-properties",
+        "expo-splash-screen",
         {
-          "ios": {
-            "useFrameworks": "static",
-            "deploymentTarget": "15.1"
-          }
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
         }
-      ],
-      "@bacons/apple-targets"
+      ]
     ],
     "experiments": {
-      "typedRoutes": true,
-      "reactServerFunctions": false,
-      "reactCompiler": true
-    },
-    "newArchEnabled": true,
-    "owner": "qlur",
-    "runtimeVersion": "1.0.0",
-    "updates": {
-      "url": "https://u.expo.dev/52ab6a77-bd0c-4c40-9952-d272a4e0781a"
+      "typedRoutes": true
     }
   }
 }

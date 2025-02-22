@@ -2,10 +2,8 @@ import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { Tabs } from "expo-router";
 import React from "react";
 // import { useColorScheme } from '@/hooks/useColorScheme';
-import { NewsPlus, Search } from "@/assets/svg/tab-icons";
 import BlurView from "@/components/BlurView";
 import { AppleNewsLogo } from "@/components/icons/AppleNewsLogo";
-import { useAudio } from "@/contexts/AudioContext";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { Platform, StatusBar, StyleSheet, useColorScheme } from "react-native";
@@ -67,7 +65,7 @@ export default function TabLayout() {
           options={{
             title: "News+",
             tabBarIcon: (props) => (
-              <NewsPlus
+              <AppleNewsLogo
                 width={24}
                 height={24}
                 color={props.focused ? "#FA2D48" : "#8E8E8F"}
@@ -82,7 +80,7 @@ export default function TabLayout() {
             title: "Following",
             headerShown: false,
             tabBarIcon: (props) => (
-              <Search
+              <AppleNewsLogo
                 width={24}
                 height={24}
                 color={props.focused ? "#FA2D48" : "#8E8E8F"}

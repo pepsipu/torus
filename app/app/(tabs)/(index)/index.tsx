@@ -1,8 +1,7 @@
-import { isWebSafari } from "@/helper/iswebsafari";
 import { useRouter, useSegments } from "expo-router";
 import Head from "expo-router/head";
 import { useState } from "react";
-import { Platform, Text, View } from "react-native";
+import { Platform, Text, View, useColorScheme } from "react-native";
 import Animated from "react-native-reanimated";
 import { RowMap, SwipeListView } from "react-native-swipe-list-view";
 
@@ -12,7 +11,6 @@ import { SwipeableNewsItem } from "@/components/SwipeableNewsItem";
 import { TabMenu } from "@/components/TabMenu";
 import { WelcomeModal } from "@/components/WelcomeModal";
 import { news } from "@/data/news.json";
-import { useColorScheme } from "@/hooks/useColorScheme";
 import {
   SafeAreaView,
   useSafeAreaInsets,
@@ -49,7 +47,7 @@ interface NewsItem {
 const TABS = [
   { id: "newspaper", label: "Newspaper", icon: "newspaper" },
   { id: "dining", label: "Dining", icon: "restaurant-outline" },
-  { id: "catalog", label: "Directory", icon: "list" },
+  { id: "directory", label: "Directory", icon: "list" },
 ];
 
 export default function NewsPlusScreen() {
@@ -100,7 +98,7 @@ export default function NewsPlusScreen() {
                   }
                 : undefined
             }
-            scrollEnabled={Platform.OS !== "web" || isWebSafari()}
+            scrollEnabled={Platform.OS !== "web"}
             contentContainerStyle={{
               // paddingTop: insets.top,
               paddingBottom: insets.bottom + 60,
@@ -135,13 +133,13 @@ export default function NewsPlusScreen() {
             }
           />
         );
-      case "magazines":
+      case "dining":
         return (
           <View className="flex-1 items-center justify-center">
             <Text className="text-lg text-gray-600">My Magazines Content</Text>
           </View>
         );
-      case "downloaded":
+      case "directory":
         return (
           <View className="flex-1 items-center justify-center">
             <Text className="text-lg text-gray-600">Downloaded Content</Text>

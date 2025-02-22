@@ -8,24 +8,18 @@ import {
   Image,
   useWindowDimensions,
 } from "react-native";
-import { useColorScheme } from "@/hooks/useColorScheme";
 import { CategoryCard } from "./CategoryCard";
 import entities from "@/app/data/entities.json";
 import { scores } from "@/data/scores.json";
 import {
   getAllCategories,
   getAllEntitiesForSection,
-} from "@/src/utils/entityUtils";
+} from "@/utils/entityUtils";
 import searchEntities from "@/app/data/search_entities.json";
 import { Ionicons } from "@expo/vector-icons";
 import { TextInput } from "react-native";
 import { useSegments, useRouter } from "expo-router";
 import { Animated } from "react-native";
-import {
-  useFonts,
-  Orbitron_700Bold,
-  Orbitron_900Black,
-} from "@expo-google-fonts/orbitron";
 import SocialButtons from "./SocialButtons";
 
 interface Entity {
@@ -132,17 +126,10 @@ const useWindowSize = () => {
 export function Sidebar() {
   const shouldUseCustomFont = true; // Only use custom font on larger screens
 
-  const [fontsLoaded] = useFonts({
-    Orbitron_700Bold,
-    Orbitron_900Black,
-  });
-
   const [searchQuery, setSearchQuery] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const segments = useSegments();
   const router = useRouter();
-  const colorScheme = useColorScheme();
-  const isDark = colorScheme === "dark";
   const { width } = useWindowDimensions();
 
   const isMobile = width < 768;
@@ -191,13 +178,6 @@ export function Sidebar() {
 
     return results;
   }, [searchQuery, entities]);
-
-  // Update the score style to use conditional font
-  const scoreStyle = {
-    ...styles.score,
-    fontFamily:
-      shouldUseCustomFont && fontsLoaded ? "Orbitron_900Black" : undefined,
-  };
 
   if (isMobile) return null;
 
@@ -249,96 +229,6 @@ export function Sidebar() {
             </View>
           )}
 
-          {!isFocused &&
-            !searchQuery &&
-            liveGames.slice(0, 2).map((game: Game) => (
-              <TouchableOpacity
-                key={game.id}
-                style={styles.scoreCard}
-                onPress={() => {
-                  router.push(`/scores/${game.id}`);
-                }}
-                className="hover:bg-gray-200 transition-all duration-500"
-              >
-                <View style={styles.scoreHeader}>
-                  <Text style={[styles.leagueText, { color: "black" }]}>
-                    {game.competition.name}
-                  </Text>
-                  <View style={styles.liveContainer}>
-                    <Text style={styles.liveText}>LIVE</Text>
-                    <MemoizedLiveDot />
-                  </View>
-                </View>
-                <View style={styles.scoreRow}>
-                  <View style={styles.teamInfo}>
-                    <Image
-                      source={{ uri: game.team1.logo }}
-                      style={[styles.teamLogo, { opacity: 0.7 }]}
-                    />
-                    <Text
-                      style={[
-                        styles.teamName,
-                        {
-                          color:
-                            (game.team1.score ?? 0) > (game.team2.score ?? 0)
-                              ? "#000000"
-                              : "#6B7280",
-                        },
-                      ]}
-                    >
-                      {game.team1.nickname}
-                    </Text>
-                  </View>
-                  <Text
-                    style={[
-                      scoreStyle,
-                      {
-                        color:
-                          (game.team1.score ?? 0) > (game.team2.score ?? 0)
-                            ? "#000000"
-                            : "#6B7280",
-                      },
-                    ]}
-                  >
-                    {game.team1.score ?? "-"}
-                  </Text>
-                </View>
-                <View style={styles.scoreRow}>
-                  <View style={styles.teamInfo}>
-                    <Image
-                      source={{ uri: game.team2.logo }}
-                      style={[styles.teamLogo, { opacity: 0.7 }]}
-                    />
-                    <Text
-                      style={[
-                        styles.teamName,
-                        {
-                          color:
-                            (game.team1.score ?? 0) < (game.team2.score ?? 0)
-                              ? "#000000"
-                              : "#6B7280",
-                        },
-                      ]}
-                    >
-                      {game.team2.nickname}
-                    </Text>
-                  </View>
-                  <Text
-                    style={[
-                      scoreStyle,
-                      {
-                        color:
-                          (game.team1.score ?? 0) < (game.team2.score ?? 0)
-                            ? "#000000"
-                            : "#6B7280",
-                      },
-                    ]}
-                  >
-                    {game.team2.score ?? "-"}
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            ))}
 
           <View style={styles.content}>
             {searchQuery ? (
@@ -430,7 +320,6 @@ const styles = StyleSheet.create({
     fontSize: 17,
     height: "100%",
     letterSpacing: -0.4,
-    outline: "none",
   },
   content: {
     flex: 1,

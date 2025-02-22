@@ -5,10 +5,10 @@ import {
   Image,
   TouchableOpacity,
   useWindowDimensions,
+  useColorScheme,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Link, useRouter } from "expo-router";
-import { useColorScheme } from "@/hooks/useColorScheme";
 
 export interface CategoryCardProps {
   id: string;

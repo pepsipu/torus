@@ -1,9 +1,7 @@
 import { ContextMenu } from "@/components/ContextMenu";
 import { DropdownMenu } from "@/components/DropdownMenu";
 import { Logo } from "@/components/NewsLogo";
-import { useColorScheme } from "@/hooks/useColorScheme";
 import { MaterialIcons } from "@expo/vector-icons";
-import { LinearGradient } from "expo-linear-gradient";
 import { Link } from "expo-router";
 import React from "react";
 import {
@@ -12,6 +10,7 @@ import {
   Platform,
   Pressable,
   Text,
+  useColorScheme,
   useWindowDimensions,
   View,
 } from "react-native";
@@ -124,20 +123,6 @@ const renderNewsContent = ({
           sharedTransitionTag={`image-${item.id}`}
         />
 
-        {item.is_news_plus && (
-          <LinearGradient
-            colors={["rgba(0,0,0,0.1)", "transparent"]}
-            start={{ x: 0.2, y: 0 }}
-            end={{ x: 0.5, y: 0 }}
-            className="flex-row py-1  absolute top-0 left-0 w-full "
-          >
-            <View className="pl-3 py-1 flex-row items-center gap-1">
-              <Logo size={16} color="#FF6C0C" forceShow={true} />
-              <Text className="text-sm font-bold text-apple-news">+</Text>
-            </View>
-          </LinearGradient>
-        )}
-
         <View className="px-4 py-3">
           <View>
             <Image
@@ -197,20 +182,6 @@ const renderNewsContent = ({
 
   return (
     <View className="relative flex">
-      {item.is_news_plus && (
-        <LinearGradient
-          colors={["rgba(0,0,0,0.1)", "transparent"]}
-          start={{ x: 0.2, y: 0 }}
-          end={{ x: 0.5, y: 0 }}
-          className="flex-row py-1   top-0 left-0 w-full  z-50 "
-        >
-          <View className="pl-3 flex-row items-center gap-1  h-[24px] ">
-            <Logo size={16} color="#FF6C0C" forceShow={true} />
-            <Text className="text-sm font-bold text-apple-news">+</Text>
-          </View>
-        </LinearGradient>
-      )}
-
       <View className="flex-1 p-4 -mt-4 pt-2  overflow-hidden">
         <View
           className="
