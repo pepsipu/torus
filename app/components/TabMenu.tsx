@@ -85,7 +85,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 10,
     borderRadius: 8,
-    backgroundColor: Platform.OS === "web" ? "#F7F7F7" : "#FFFFFF",
     marginRight: 8,
     flexDirection: "row",
     alignItems: "center",

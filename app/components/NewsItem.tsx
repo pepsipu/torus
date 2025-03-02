@@ -143,12 +143,7 @@ const renderNewsContent = ({
             {item.title}
           </Animated.Text>
 
-          {item.description && Platform.OS === "web" && (
-            <Text className="text-base text-gray-500 mt-2 tracking-tighter ">
-              {item.description}
-            </Text>
-          )}
-
+          {item.description}
           {item.related_news && item.related_news.length > 0 && (
             <View className="mt-4">
               <Text className="text-sm font-extrabold mb-3">MORE COVERAGE</Text>
@@ -318,17 +313,11 @@ export const NewsItem = ({ item }: NewsItemProps) => {
 
   return (
     <View
-      className={`mb-3 rounded-xl overflow-hidden mx-5 relative ${
-        Platform.OS === "web" ? "bg-gray-100" : "bg-white"
-      }
+      className={`mb-3 rounded-xl overflow-hidden mx-5 relative
      hover:bg-gray-200 transition-all duration-300
      `}
     >
-      <ContextMenu.Root
-        style={{
-          backgroundColor: Platform.OS === "web" ? "transparent" : "white",
-        }}
-      >
+      <ContextMenu.Root>
         <ContextMenu.Trigger>
           <Link href={href} asChild>
             <Pressable className="flex-1">

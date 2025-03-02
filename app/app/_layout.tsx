@@ -47,11 +47,6 @@ function AnimatedStack() {
         style={[
           styles.stackContainer,
           Platform.OS === "ios" && animatedStyle,
-          Platform.OS === "web" && {
-            position: "relative",
-            overflow: "unset!important",
-            height: "auto",
-          },
         ]}
       >
         <Stack screenOptions={{ headerShown: false }}>
@@ -65,6 +60,7 @@ function AnimatedStack() {
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+  console.log(colorScheme);
 
   useEffect(() => {
     SplashScreen.hideAsync();

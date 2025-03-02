@@ -73,7 +73,7 @@ export const WelcomeModal = () => {
     ]).start();
 
     return () => {
-      setStatusBarStyle("light");
+      // setStatusBarStyle("light");
     };
   }, []);
 
@@ -93,7 +93,7 @@ export const WelcomeModal = () => {
     >
       <StatusBar style={statusBarStyle === "dark" ? "dark" : "light"} />
       <View
-        className="flex-1 bg-white"
+        className="flex-1"
         style={{
           maxWidth: 767,
           width: "100%",

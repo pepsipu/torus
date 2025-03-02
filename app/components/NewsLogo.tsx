@@ -10,7 +10,6 @@ interface NewsLogoProps {
 
 export const Logo = ({
   size = 24,
-  color = "#000",
   forceShow = false,
 }: NewsLogoProps) => {
   const { width } = useWindowDimensions();
@@ -27,9 +26,9 @@ export const Logo = ({
 
   return (
     <View style={styles.container}>
-      <OliveWalkIcon name="logo-apple" size={size} color={color} />
+      <OliveWalkIcon name="logo-apple" size={size} />
       {(showSidebar || isMobile) && (
-        <Text style={[styles.text, { fontSize: size, color }]}>Walk</Text>
+        <Text style={[styles.text, { fontSize: size }]}>Walk</Text>
       )}
     </View>
   );

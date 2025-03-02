@@ -1,0 +1,202 @@
+{ "foodPlaces":
+  {
+
+    "Open Kitchen":
+    { "Sunday":    [],
+      "Monday":    [[700, 1100], [1500, 1900]],
+      "Tuesday":   [[700, 1100], [1500, 1900]],
+      "Wednesday": [[700, 1100], [1500, 1900]],
+      "Thursday":  [[700, 1100], [1500, 1900]],
+      "Friday":    [[700, 1100], [1500, 1900]],
+      "Saturday":  []
+    },
+    "Browne (Breakfast)":
+    { "Sunday":    [[900, 1500]],
+      "Monday":    [[700, 1030]],
+      "Tuesday":   [[700, 1030]],
+      "Wednesday": [[700, 1030]],
+      "Thursday":  [[700, 1030]],
+      "Friday":    [[700, 1030]],
+      "Saturday":  [[900, 1500]]
+    },
+    "Browne (Sushi)":
+    { "Sunday":    [],
+      "Monday":    [[1100, 1300]],
+      "Tuesday":   [[1100, 1300]],
+      "Wednesday": [[1100, 1300]],
+      "Thursday":  [[1100, 1300]],
+      "Friday":    [[1100, 1300]],
+      "Saturday":  []
+    },
+    "Browne (Lunch)":
+    { "Sunday":    [],
+      "Monday":    [[1100, 1400]],
+      "Tuesday":   [[1100, 1400]],
+      "Wednesday": [[1100, 1400]],
+      "Thursday":  [[1100, 1400]],
+      "Friday":    [[1100, 1400]],
+      "Saturday":  []
+    },
+    "Browne (Pizza/Grill)":
+    { "Sunday":    [],
+      "Monday":    [[1100, 1530], [1700, 1930]],
+      "Tuesday":   [[1100, 1530], [1700, 1930]],
+      "Wednesday": [[1100, 1530], [1700, 1930]],
+      "Thursday":  [[1100, 1530], [1700, 1930]],
+      "Friday":    [[1100, 1530], [1700, 1930]],
+      "Saturday":  []
+    },
+    "Browne (Dinner)":
+    { "Sunday":    [],
+      "Monday":    [[1700, 1930]],
+      "Tuesday":   [[1700, 1930]],
+      "Wednesday": [[1700, 1930]],
+      "Thursday":  [[1700, 1930]],
+      "Friday":    [[1700, 1930]],
+      "Saturday":  []
+    },
+    "Red Door Marketplace":
+    { "Sunday":    [[1500, 2600]],
+      "Monday":    [[700, 2600]],
+      "Tuesday":   [[700, 2600]],
+      "Wednesday": [[700, 2600]],
+      "Thursday":  [[700, 2600]],
+      "Friday":    [[700, 2600]],
+      "Saturday":  [[1500, 2600]]
+    },
+    "Avery Kitchen":
+    { "Sunday":    [],
+      "Monday":    [[1130, 1300]],
+      "Tuesday":   [[1130, 1300]],
+      "Wednesday": [[1130, 1300]],
+      "Thursday":  [[1130, 1300]],
+      "Friday":    [[1130, 1300]],
+      "Saturday":  []
+    },
+    "Broad Cafe (Breakfast)":
+    { "Sunday":    [],
+      "Monday":    [[730, 1030]],
+      "Tuesday":   [[730, 1030]],
+      "Wednesday": [[730, 1030]],
+      "Thursday":  [[730, 1030]],
+      "Friday":    [[730, 1030]],
+      "Saturday":  []
+    },
+    "Broad Cafe (Lunch)":
+    { "Sunday":    [],
+      "Monday":    [[1100, 1430]],
+      "Tuesday":   [[1100, 1430]],
+      "Wednesday": [[1100, 1430]],
+      "Thursday":  [[1100, 1430]],
+      "Friday":    [[1100, 1430]],
+      "Saturday":  []
+    },
+    "House Dinner":
+    { "Sunday":    [],
+      "Monday":    [[1730, 1900]],
+      "Tuesday":   [[1730, 1900]],
+      "Wednesday": [[1730, 1900]],
+      "Thursday":  [[1730, 1900]],
+      "Friday":    [[1730, 1900]],
+      "Saturday":  []
+    }
+  },
+  "libraryPlaces":
+  {
+
+    "SFL (ID required)":
+    { "Sunday":    [[1200, 2000]],
+      "Monday":    [[800, 2400]],
+      "Tuesday":   [[0, 2400]],
+      "Wednesday": [[0, 2400]],
+      "Thursday":  [[0, 2400]],
+      "Friday":    [[0, 2200]],
+      "Saturday":  [[1200, 2000]]
+    },
+    "Caltech Hall Library (ID required)":
+    { "Sunday":    [],
+      "Monday":    [[800, 2300]],
+      "Tuesday":   [[800, 2300]],
+      "Wednesday": [[800, 2300]],
+      "Thursday":  [[800, 2300]],
+      "Friday":    [[800, 2300]],
+      "Saturday":  []
+    },
+    "Dabney Library":
+    { "Sunday":    [],
+      "Monday":    [[800, 1700]],
+      "Tuesday":   [[800, 1700]],
+      "Wednesday": [[800, 1700]],
+      "Thursday":  [[800, 1700]],
+      "Friday":    [[800, 1700]],
+      "Saturday":  []
+    },
+    "Cahill Library":
+    { "Sunday":    [],
+      "Monday":    [[800, 1700]],
+      "Tuesday":   [[800, 1700]],
+      "Wednesday": [[800, 1700]],
+      "Thursday":  [[800, 1700]],
+      "Friday":    [[800, 1700]],
+      "Saturday":  []
+    },
+    "Geology Library":
+    { "Sunday":    [],
+      "Monday":    [[800, 1700]],
+      "Tuesday":   [[800, 1700]],
+      "Wednesday": [[800, 1700]],
+      "Thursday":  [[800, 1700]],
+      "Friday":    [[800, 1700]],
+      "Saturday":  []
+    }
+  },
+  "miscPlaces":
+  {
+
+    "The Tech Express":
+    { "Sunday":    [],
+      "Monday":    [[830, 1630]],
+      "Tuesday":   [[830, 1630]],
+      "Wednesday": [[830, 1630]],
+      "Thursday":  [[830, 1630]],
+      "Friday":    [[830, 1630]],
+      "Saturday":  []
+    },
+    "Braun Athletic Center (Building)":
+    { "Sunday":    [[800, 2000]],
+      "Monday":    [[600, 2200]],
+      "Tuesday":   [[600, 2200]],
+      "Wednesday": [[600, 2200]],
+      "Thursday":  [[600, 2200]],
+      "Friday":    [[600, 2200]],
+      "Saturday":  [[800, 2000]]
+    },
+    "Braun Athletic Center (Barn, Brown Gym, Field, Tennis Courts)":
+    { "Sunday":    [[800, 1930]],
+      "Monday":    [[600, 2130]],
+      "Tuesday":   [[600, 2130]],
+      "Wednesday": [[600, 2130]],
+      "Thursday":  [[600, 2130]],
+      "Friday":    [[600, 2130]],
+      "Saturday":  [[800, 1930]]
+    },
+    "Braun Athletic Center (Pool Deck)":
+    { "Sunday":    [[1200, 1745]],
+      "Monday":    [[600, 2030]],
+      "Tuesday":   [[600, 2030]],
+      "Wednesday": [[600, 2030]],
+      "Thursday":  [[600, 2030]],
+      "Friday":    [[600, 2030]],
+      "Saturday":  [[1200, 1745]]
+    },
+    "Bookstore":
+    { "Sunday":    [],
+      "Monday":    [[900, 1730]],
+      "Tuesday":   [[900, 1730]],
+      "Wednesday": [[900, 1730]],
+      "Thursday":  [[900, 1730]],
+      "Friday":    [[900, 1730]],
+      "Saturday":  []
+    }
+  }
+}

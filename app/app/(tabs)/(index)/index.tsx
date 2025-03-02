@@ -90,24 +90,8 @@ export default function NewsPlusScreen() {
             previewOpenDelay={3000}
             bounces={false}
             keyExtractor={(item: any) => item.id}
-            style={
-              Platform.OS === "web"
-                ? {
-                    height: undefined,
-                    overflow: "visible",
-                  }
-                : undefined
-            }
-            scrollEnabled={Platform.OS !== "web"}
             contentContainerStyle={{
-              // paddingTop: insets.top,
               paddingBottom: insets.bottom + 60,
-              backgroundColor: Platform.OS !== "web" ? "#F2F2F7" : "white",
-              ...(Platform.OS === "web"
-                ? {
-                    height: undefined,
-                  }
-                : {}),
             }}
             ListHeaderComponent={
               <View className="space-y-4">
