@@ -1,63 +1,49 @@
 import { Tabs } from "expo-router";
 import React from "react";
-import BlurView from "@/components/BlurView";
-import { AppleNewsLogo } from "@/components/icons/AppleNewsLogo";
-import { useRouter } from "expo-router";
-import { Platform, StatusBar, StyleSheet, useColorScheme } from "react-native";
-import { tabs } from "../data/tabs";
-import { Ionicons } from "@expo/vector-icons";
+import { Platform } from "react-native";
 
-export const unstable_settings = {
-  initialRouteName: "(index)",
-};
+import { HapticTab } from "@/components/HapticTab";
+import { IconSymbol } from "@/components/ui/IconSymbol";
+import TabBarBackground from "@/components/ui/TabBarBackground";
+import { Colors } from "@/constants/Colors";
+import { useColorScheme } from "@/hooks/useColorScheme";
 
 export default function TabLayout() {
-  const router = useRouter();
+  const colorScheme = useColorScheme();
 
   return (
-    <>
-      <Tabs
-        screenOptions={{
-          animation: "shift",
-          tabBarActiveTintColor: "#FF6C0C",
-          headerShown: false,
-          lazy: true,
-          tabBarStyle: {
+    <Tabs
+      screenOptions={{
+        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        headerShown: false,
+        tabBarButton: HapticTab,
+        tabBarBackground: TabBarBackground,
+        tabBarStyle: Platform.select({
+          ios: {
             position: "absolute",
-            backgroundColor: Platform.select({
-              ios: "transparent",
-              android: "rgba(255, 255, 255, 1)",
-            }),
-            borderTopWidth: StyleSheet.hairlineWidth,
-            borderTopColor: "rgba(0,0,0,0.2)",
-            elevation: 0,
           },
-          headerStyle: {
-            height: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-          },
-          tabBarBackground: () =>
-            Platform.OS === "ios" ? (
-              <BlurView
-                tint={"systemThickMaterialLight"}
-                intensity={80}
-                style={StyleSheet.absoluteFill}
-              />
-            ) : null,
+          default: {},
+        }),
+      }}
+    >
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: "Home",
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={28} name="house.fill" color={color} />
+          ),
         }}
-      >
-        {tabs.map(tab => {
-          return <Tabs.Screen
-          name={tab.name}
-          options={{
-            title: tab.title,
-            tabBarIcon: ({ color, focused }) => (
-              <Ionicons name={tab.icon} color={color} />
-            ),
-          }}
-        />
-        })}
-        
-      </Tabs>
-    </>
+      />
+      <Tabs.Screen
+        name="explore"
+        options={{
+          title: "Explore",
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={28} name="paperplane.fill" color={color} />
+          ),
+        }}
+      />
+    </Tabs>
   );
 }
