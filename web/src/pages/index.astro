@@ -1,0 +1,31 @@
+---
+import { Button } from "@/components/ui/button";
+import {
+  PageActions,
+  PageHeader,
+  PageHeaderDescription,
+  PageHeaderHeading,
+} from "@/components/ui/page-header";
+import Site from "@/layouts/Site.astro";
+---
+
+<Site
+  content={{
+    title: "torus",
+  }}
+>
+  <PageHeader>
+    <PageHeaderHeading>It's a more general donut.</PageHeaderHeading>
+    <PageHeaderDescription
+      >Everything Caltech, in one place.
+    </PageHeaderDescription>
+    <!-- <PageActions>
+      <Button asChild size="sm" className="rounded-md">
+        <a href="/docs/installation">Get Started</a>
+      </Button>
+      <Button asChild size="sm" variant="ghost" className="rounded-md">
+        <a href="/blocks">Browse Blocks</a>
+      </Button>
+    </PageActions> -->
+  </PageHeader>
+</Site>
