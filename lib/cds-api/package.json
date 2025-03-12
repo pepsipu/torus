@@ -1,5 +1,5 @@
 {
-  "name": "cds-api",
+  "name": "@torus/cds-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

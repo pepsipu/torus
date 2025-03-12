@@ -1,5 +1,6 @@
 ---
 import { Button } from "@/components/ui/button";
+import { MajorSelect } from "@/components/courses/major-select";
 import {
   PageActions,
   PageHeader,
@@ -15,8 +16,11 @@ import Site from "@/layouts/Site.astro";
   }}
 >
   <PageHeader>
-    <PageHeaderHeading>Copurses?</PageHeaderHeading>
-    <PageHeaderDescription>i love courses </PageHeaderDescription>
+    <PageHeaderHeading>Find courses.</PageHeaderHeading>
+    <PageHeaderDescription
+      >Search for courses, read their TQFRs, and audit your degree completion
+      here.</PageHeaderDescription
+    >
     <!-- <PageActions>
       <Button asChild size="sm" className="rounded-md">
         <a href="/docs/installation">Get Started</a>
@@ -26,4 +30,14 @@ import Site from "@/layouts/Site.astro";
       </Button>
     </PageActions> -->
   </PageHeader>
+  <div class="border-grid border-b">
+    <div class="container-wrapper">
+      <div class="container py-4">
+        <MajorSelect client:load />
+      </div>
+      <div class="container py-4">
+        <MajorSelect client:load />
+      </div>
+    </div>
+  </div>
 </Site>

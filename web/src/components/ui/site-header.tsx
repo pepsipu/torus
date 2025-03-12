@@ -1,5 +1,5 @@
-import { MainNav } from "@/components/main-nav";
-import { MobileNav } from "@/components/mobile-nav";
+import { MainNav } from "@/components/ui/main-nav";
+import { MobileNav } from "@/components/ui/mobile-nav";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { Github } from "lucide-react";

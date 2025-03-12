@@ -9,10 +9,6 @@ export const docsConfig = {
       href: "/courses",
     },
     {
-      title: "News",
-      href: "/news",
-    },
-    {
       title: "More",
       href: "/more",
     },
