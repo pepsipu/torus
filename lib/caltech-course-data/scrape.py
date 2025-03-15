@@ -3,8 +3,6 @@ import os
 from bs4 import BeautifulSoup, SoupStrainer
 import json
 import time
-import lxml
-import cchardet
 import re
 
 if not os.path.exists("coursedata"):
